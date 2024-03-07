@@ -1,4 +1,4 @@
-package com.dkit.oop.sd2.DAOs;
+package projectPackage.DAOs;
 
 /** OOP Feb 2022
  * UserDaoInterface
@@ -21,14 +21,15 @@ package com.dkit.oop.sd2.DAOs;
 
 import com.dkit.oop.sd2.DTOs.User;
 import com.dkit.oop.sd2.Exceptions.DaoException;
+
 import java.util.List;
 
-public interface UserDaoInterface
+public interface TeamDaoInterface
 {
-    public List<User> findAllUsers() throws DaoException;
+    public List<Team> findAllTeams() throws DaoException;
 
-    public User findUserByUsernamePassword(String username, String password) throws DaoException;
-    public int register(String fname, String lname, String user_name, String password) throws DaoException;
+//    public User findUserByUsernamePassword(String username, String password) throws DaoException;
+//    public int register(String fname, String lname, String user_name, String password) throws DaoException;
 
 }
 

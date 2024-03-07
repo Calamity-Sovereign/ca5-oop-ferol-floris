@@ -1,4 +1,4 @@
-package com.dkit.oop.sd2.DAOs;
+package projectPackage.DAOs;
 
 /** OOP Feb 2024
  *
@@ -18,8 +18,9 @@ package com.dkit.oop.sd2.DAOs;
  * in the DAO layer.
  */
 
-import com.dkit.oop.sd2.DTOs.User;
-import com.dkit.oop.sd2.Exceptions.DaoException;
+import projectPackage.DTOs.Team;
+import projectPackage.DTOs.DaoException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySqlUserDao extends MySqlDao implements UserDaoInterface
+public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 {
     /**
      * Will access and return a List of all users in User database table
@@ -97,12 +98,12 @@ public class MySqlUserDao extends MySqlDao implements UserDaoInterface
 
     //////////////////////////////////////////////////////////////////////////////////
     @Override
-    public List<User> findAllUsers() throws DaoException
+    public List<Team> findAllTeams() throws DaoException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<User> usersList = new ArrayList<>();
+        List<Team> usersList = new ArrayList<>();
 
         try
         {
@@ -110,20 +111,20 @@ public class MySqlUserDao extends MySqlDao implements UserDaoInterface
             // from the super class (MySqlDao.java)
             connection = this.getConnection();
 
-            String query = "SELECT * FROM USER";
+            String query = "SELECT * FROM TEAM";
             preparedStatement = connection.prepareStatement(query);
 
             //Using a PreparedStatement to execute SQL...
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
-                int userId = resultSet.getInt("USER_ID");
-                String username = resultSet.getString("USERNAME");
-                String password = resultSet.getString("PASSWORD");
-                String lastname = resultSet.getString("LAST_NAME");
-                String firstname = resultSet.getString("FIRST_NAME");
-                User u = new User(userId, firstname, lastname, username, password);
-                usersList.add(u);
+//                int userId = resultSet.getInt("USER_ID");
+//                String username = resultSet.getString("USERNAME");
+//                String password = resultSet.getString("PASSWORD");
+//                String lastname = resultSet.getString("LAST_NAME");
+//                String firstname = resultSet.getString("FIRST_NAME");
+//                User u = new User(userId, firstname, lastname, username, password);
+//                usersList.add(u);
             }
         } catch (SQLException e)
         {

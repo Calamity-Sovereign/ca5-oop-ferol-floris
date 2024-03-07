@@ -1,2 +1,6 @@
-package DTOs;public class Team {
+package projectPackage.DTOs;
+
+public class Team {
+
+
 }

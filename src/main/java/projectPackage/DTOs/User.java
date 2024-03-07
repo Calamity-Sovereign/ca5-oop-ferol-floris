@@ -1,4 +1,4 @@
-package com.dkit.oop.sd2.DTOs;
+package projectPackage.DTOs;
 
 /**                                                     OOP Feb 2022
  *  Data Transfer Object (DTO)
@@ -31,7 +31,7 @@ public class User
         this.password = password;
     }
 
-    public User( String firstName, String lastName, String username, String password)
+    public User(String firstName, String lastName, String username, String password)
     {
         this.id = 0;
         this.firstName = firstName;
