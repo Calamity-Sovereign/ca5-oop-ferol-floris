@@ -19,8 +19,9 @@ package projectPackage.DAOs;
  * can be replaced by mock DAO objects.
  */
 
-import com.dkit.oop.sd2.DTOs.User;
-import com.dkit.oop.sd2.Exceptions.DaoException;
+
+import projectPackage.DTOs.Team;
+import projectPackage.Exceptions.DaoException;
 
 import java.util.List;
 

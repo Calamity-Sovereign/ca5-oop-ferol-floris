@@ -94,8 +94,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
         return code;     // reference to User object, or null value
     }
 
-
-
     //////////////////////////////////////////////////////////////////////////////////
     @Override
     public List<Team> findAllTeams() throws DaoException
@@ -161,12 +159,12 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
      * @throws DaoException
      */
     @Override
-    public User findUserByUsernamePassword(String user_name, String password) throws DaoException
+    public Team findUserByUsernamePassword(String user_name, String password) throws DaoException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        User user = null;
+        Team user = null;
         try
         {
             connection = this.getConnection();
@@ -185,7 +183,7 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
                 String lastname = resultSet.getString("LAST_NAME");
                 String firesultSettname = resultSet.getString("FIRST_NAME");
 
-                user = new User(userId, firesultSettname, lastname, username, pwd);
+                user = new Team(userId, firesultSettname, lastname, username, pwd);
             }
         } catch (SQLException e)
         {
