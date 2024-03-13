@@ -8,8 +8,8 @@ package projectPackage.DAOs;
  *
  */
 
-import com.dkit.oop.sd2.Exceptions.DaoException;
 
+import projectPackage.Exceptions.DaoException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

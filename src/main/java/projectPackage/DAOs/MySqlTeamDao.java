@@ -19,8 +19,7 @@ package projectPackage.DAOs;
  */
 
 import projectPackage.DTOs.Team;
-import projectPackage.DTOs.DaoException;
-
+import projectPackage.Exceptions.DaoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,17 +27,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 {
-    /**
-     * Will access and return a List of all users in User database table
-     * @return List of User objects
-     * @throws DaoException
-     */
+//    /**
+//     * Will access and return a List of all users in User database table
+//     * @return List of User objects
+//     * @throws DaoException
+//     */
     //////////////////////////////////////////////////////////////////////////////
-    //    public User findUserByUsernamePassword(String user_name, String password) throws DaoException {
-    public int register(String fname, String lname,
-                        String user_name, String password) throws DaoException {
+
+    public int register(String fname, String lname, String user_name, String password) throws DaoException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -49,7 +49,8 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
         try {
             connection = this.getConnection();
 
-//            String query = "SELECT * FROM USER WHERE USERNAME = ? AND PASSWORD = ?";
+//////////////////////Feature 4 //////////////////////////////
+
             String query = "INSERT INTO USER VALUES ( null, ?, ?, ?, ? )";
 
             preparedStatement = connection.prepareStatement(query);
@@ -63,17 +64,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 
             code = preparedStatement.executeUpdate();   // executeQuery();
 
-            //return code;
-
-//            if (resultSet.next()) {
-//                int userId = resultSet.getInt("USER_ID");
-//                String username = resultSet.getString("USERNAME");
-//                String pwd = resultSet.getString("PASSWORD");
-//                String lastname = resultSet.getString("LAST_NAME");
-//                String firesultSettname = resultSet.getString("FIRST_NAME");
-//
-//                user = new User(userId, firesultSettname, lastname, username, pwd);
-//            }
         } catch (SQLException e) {
             throw new DaoException("findUserByUsernamePassword() " + e.getMessage());
         } finally {
@@ -94,7 +84,12 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
         return code;     // reference to User object, or null value
     }
 
-    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////End of Feature 4//////////////
+
+    ///////////////////Feature 1///////////////////
+    ////////Finding all Teams Users/////
+
+
     @Override
     public List<Team> findAllTeams() throws DaoException
     {
@@ -105,8 +100,7 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 
         try
         {
-            //Get connection object using the getConnection() method inherited
-            // from the super class (MySqlDao.java)
+            //Get connection object using the getConnection() method inherited// from the super class (MySqlDao.java)
             connection = this.getConnection();
 
             String query = "SELECT * FROM TEAM";
@@ -116,17 +110,17 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
-//                int userId = resultSet.getInt("USER_ID");
-//                String username = resultSet.getString("USERNAME");
-//                String password = resultSet.getString("PASSWORD");
-//                String lastname = resultSet.getString("LAST_NAME");
-//                String firstname = resultSet.getString("FIRST_NAME");
-//                User u = new User(userId, firstname, lastname, username, password);
-//                usersList.add(u);
+                int teamId = resultSet.getInt("Team_ID");
+                String username = resultSet.getString("USERNAME");
+                String password = resultSet.getString("PASSWORD");
+                String lastname = resultSet.getString("LAST_NAME");
+                String firstname = resultSet.getString("FIRST_NAME");
+                Team u = new Team(teamId, firstname, lastname, username, password);
+                usersList.add(u);
             }
         } catch (SQLException e)
         {
-            throw new DaoException("findAllUseresultSet() " + e.getMessage());
+            throw new DaoException("find All Team ResultSet() " + e.getMessage());
         } finally
         {
             try
@@ -150,6 +144,8 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
         }
         return usersList;     // may be empty
     }
+
+    ///////////////////End of Feature 1 code///////////////////
 
     /**
      * Given a username and password, find the corresponding User
