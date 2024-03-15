@@ -41,7 +41,7 @@ public class App
 
             //////////End of Feature 4/////
 
-            System.out.println("\nCall findAllUsers()");
+            System.out.println("\nCall findAllTeams()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
 
             if( teams.isEmpty() )

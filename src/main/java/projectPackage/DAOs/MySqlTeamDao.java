@@ -86,6 +86,8 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 
     ///////////////////Feature 1///////////////////
     ////////Finding all Teams Users/////
+    // Floris Ferol 14 May 2024
+    //
     @Override
     public List<Team> findAllTeams() throws DaoException
     {
@@ -111,8 +113,8 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
                 String teamName = resultSet.getString("Team_Name");
                 String region = resultSet.getString("Region");
                 String division = resultSet.getString("Division");
-                int  foundedIn = resultSet.getInt(" foundedIn");
-                Team u = new Team(id, teamCode, teamName, region, division, foundedIn);
+                int  Founded_in = resultSet.getInt("Founded_in");
+                Team u = new Team(id, teamCode, teamName, region, division, Founded_in);
                 usersList.add(u);
             }
         } catch (SQLException e)
@@ -174,8 +176,8 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
                 String teamName = resultSet.getString("Team_Name");
                 String region = resultSet.getString("Region");
                 String division = resultSet.getString("Division");
-                int  foundedIn = resultSet.getInt(" foundedIn");
-                Team u = new Team(id, teamCode, teamName, region, division, foundedIn);
+                int  Founded_in = resultSet.getInt(" Founded_in");
+                Team u = new Team(id, teamCode, teamName, region, division, Founded_in);
 //                TeamList.add(u);
             }
         } catch (SQLException e)
