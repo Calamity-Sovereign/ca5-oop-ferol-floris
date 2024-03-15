@@ -18,27 +18,30 @@ package projectPackage.DTOs;
 public class Team
 {
     private int id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
+    private String teamCode;
+    private String teamName;
+    private String region;
+    private String division;
+    private int founded_in;
 
-    public Team(int teamId, String firstName, String lastName, String username, String password)
+    public Team(int Id, String teamCode, String teamName, String region, String division, int founded_in)
     {
-        this.id = teamId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
+        this.id = Id;
+        this.teamCode = teamCode;
+        this.teamName = teamName;
+        this.region = region;
+        this.division = division;
+        this.founded_in = founded_in;
     }
 
-    public Team(String firstName, String lastName, String username, String password)
+    public Team(String Team_Code, String teamName, String region, String division, int founded_in)
     {
         this.id = 0;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
+        this.teamCode = teamCode;
+        this.teamName = teamName;
+        this.region = region;
+        this.division = division;
+        this.founded_in = founded_in;
     }
 
     public Team()
@@ -55,52 +58,61 @@ public class Team
         this.id = id;
     }
 
-    public String getFirstName()
+    public String teamCode()
     {
-        return firstName;
+        return teamCode;
     }
 
-    public void setFirstName(String firstName)
+    public void teamCode(String teamCode)
     {
-        this.firstName = firstName;
+        this.teamCode = teamCode;
     }
 
-    public String getLastName()
+    public String teamName()
     {
-        return lastName;
+        return teamName;
     }
 
-    public void setLastName(String lastName)
+    public void setteamName(String teamName)
     {
-        this.lastName = lastName;
+        this.teamName = teamName;
     }
 
-    public String getUsername()
+    public String getregion()
     {
-        return username;
+        return region;
     }
 
-    public void setUsername(String username)
+    public void setregion(String region)
     {
-        this.username = username;
+        this.region = region;
     }
 
-    public String getPassword()
+    public String getDivision()
     {
-        return password;
+        return division;
     }
 
-    public void setPassword(String password)
+    public void setDivision(String division)
     {
-        this.password = password;
+        this.division = division;
+    }
+
+    public int getfounded_in()
+    {
+        return founded_in;
+    }
+
+    public int setfounded_in(String founded_in)
+    {
+        this.founded_in = founded_in;
     }
 
     @Override
     public String toString()
     {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" +
-                lastName + ", username=" + username + ", password=" + password + '}';
+        return "team{" + "id=" + id + ", teamCode=" + teamCode + ", teamName=" +
+                teamName + ", region=" + region + ", division=" + division + ", founded_in=" + founded_in + '}';
     }
 
 }
-

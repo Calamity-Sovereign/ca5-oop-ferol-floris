@@ -1,22 +1,22 @@
 package projectPackage.DAOs;
 
-/** OOP Feb 2024
- *
- * Data Access Object (DAO) for User table with MySQL-specific code
- * This 'concrete' class implements the 'UserDaoInterface'.
- *
- * The DAO will contain the SQL query code to interact with the database,
- * so, the code here is specific to a MySql database.
- * No SQL queries will be used in the Business logic layer of code, thus, it
- * will be independent of the database specifics. Changes to code related to
- * the database are all contained withing the DAO code base.
- *
- *
- * The Business Logic layer is only permitted to access the database by calling
- * methods provided in the Data Access Layer - i.e. by calling the DAO methods.
- * In this way, the Business Logic layer is seperated from the database specific code
- * in the DAO layer.
- */
+///** OOP Feb 2024
+// *
+// * Data Access Object (DAO) for User table with MySQL-specific code
+// * This 'concrete' class implements the 'UserDaoInterface'.
+// *
+// * The DAO will contain the SQL query code to interact with the database,
+// * so, the code here is specific to a MySql database.
+// * No SQL queries will be used in the Business logic layer of code, thus, it
+// * will be independent of the database specifics. Changes to code related to
+// * the database are all contained withing the DAO code base.
+// *
+// *
+// * The Business Logic layer is only permitted to access the database by calling
+// * methods provided in the Data Access Layer - i.e. by calling the DAO methods.
+// * In this way, the Business Logic layer is seperated from the database specific code
+// * in the DAO layer.
+// */
 
 import projectPackage.DTOs.Team;
 import projectPackage.Exceptions.DaoException;
@@ -26,8 +26,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 {
@@ -43,7 +41,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        //User user = null;
         int code=0;
 
         try {
@@ -86,10 +83,9 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 
     //////////////////End of Feature 4//////////////
 
+
     ///////////////////Feature 1///////////////////
     ////////Finding all Teams Users/////
-
-
     @Override
     public List<Team> findAllTeams() throws DaoException
     {
@@ -110,12 +106,13 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
-                int teamId = resultSet.getInt("Team_ID");
-                String username = resultSet.getString("USERNAME");
-                String password = resultSet.getString("PASSWORD");
-                String lastname = resultSet.getString("LAST_NAME");
-                String firstname = resultSet.getString("FIRST_NAME");
-                Team u = new Team(teamId, firstname, lastname, username, password);
+                int id = resultSet.getInt("id");
+                String teamCode = resultSet.getString("Team_Code");
+                String teamName = resultSet.getString("Team_Name");
+                String region = resultSet.getString("Region");
+                String division = resultSet.getString("Division");
+                int  foundedIn = resultSet.getInt(" foundedIn");
+                Team u = new Team(id, teamCode, teamName, region, division, foundedIn);
                 usersList.add(u);
             }
         } catch (SQLException e)
@@ -146,7 +143,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
     }
 
     ///////////////////End of Feature 1 code///////////////////
-
     /**
      * Given a username and password, find the corresponding User
      * @param user_name
@@ -173,13 +169,14 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next())
             {
-                int userId = resultSet.getInt("USER_ID");
-                String username = resultSet.getString("USERNAME");
-                String pwd = resultSet.getString("PASSWORD");
-                String lastname = resultSet.getString("LAST_NAME");
-                String firesultSettname = resultSet.getString("FIRST_NAME");
-
-                user = new Team(userId, firesultSettname, lastname, username, pwd);
+                int id = resultSet.getInt("id");
+                String teamCode = resultSet.getString("Team_Code");
+                String teamName = resultSet.getString("Team_Name");
+                String region = resultSet.getString("Region");
+                String division = resultSet.getString("Division");
+                int  foundedIn = resultSet.getInt(" foundedIn");
+                Team u = new Team(id, teamCode, teamName, region, division, foundedIn);
+//                TeamList.add(u);
             }
         } catch (SQLException e)
         {

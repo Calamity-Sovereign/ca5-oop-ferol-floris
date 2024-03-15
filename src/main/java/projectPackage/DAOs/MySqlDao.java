@@ -9,17 +9,19 @@ package projectPackage.DAOs;
  */
 
 
+import projectPackage.DTOs.Team;
 import projectPackage.Exceptions.DaoException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySqlDao
+public abstract class MySqlDao
 {
+
     public Connection getConnection() throws DaoException
     {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/user_database";
+        String url = "jdbc:mysql://localhost:3306/oopca5";
         String username = "root";
         String password = "";
         Connection connection = null;
@@ -58,4 +60,6 @@ public class MySqlDao
             System.exit(1);
         }
     }
+
+    public abstract Team findUserByUsernamePassword(String user_name, String password) throws DaoException;
 }

@@ -1,21 +1,21 @@
 package projectPackage.BusinessObjects;
 
-/** OOP Feb 2022
- * This App demonstrates the use of a Data Access Object (DAO)
- * to separate Business logic from Database specific logic.
- * It uses Data Access Objects (DAOs),
- * Data Transfer Objects (DTOs), and  a DAO Interface to define
- * a contract between Business Objects and DAOs.
- *
- * "Use a Data Access Object (DAO) to abstract and encapsulate all
- * access to the data source. The DAO manages the connection with
- * the data source to obtain and store data" Ref: oracle.com
- *
- * Here, we use one DAO per database table.
- *
- * Use the SQL script "CreateUsers.sql" included with this project
- * to create the required MySQL user_database and User table.
- */
+///** OOP Feb 2022
+// * This App demonstrates the use of a Data Access Object (DAO)
+// * to separate Business logic from Database specific logic.
+// * It uses Data Access Objects (DAOs),
+// * Data Transfer Objects (DTOs), and  a DAO Interface to define
+// * a contract between Business Objects and DAOs.
+// *
+// * "Use a Data Access Object (DAO) to abstract and encapsulate all
+// * access to the data source. The DAO manages the connection with
+// * the data source to obtain and store data" Ref: oracle.com
+// *
+// * Here, we use one DAO per database table.
+// *
+// * Use the SQL script "CreateUsers.sql" included with this project
+// * to create the required MySQL user_database and User table.
+// */
 
 import projectPackage.DAOs.MySqlTeamDao;
 import projectPackage.DAOs.TeamDaoInterface;
@@ -29,6 +29,64 @@ public class App
     public static void main(String[] args)
     {
             TeamDaoInterface ITeamDao = new MySqlTeamDao();  //"IUserDao" -> "I" stands for for
+        //-
+
+        //-
+        try
+        {
+            //////////Feature 4
+
+//          int result = ((MySqlTeamDao) ITeamDao).register("Floris","Ferol","D00248195","Dermot");
+//          System.out.println(result);
+
+            //////////
+
+            System.out.println("\nCall findAllUsers()");
+            List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
+
+            if( teams.isEmpty() )
+                System.out.println("There are no Users");
+            else {
+                for (Team team : teams)
+                    System.out.println("User: " + team.toString());
+            }
+            ///--
+
+            ///--
+        }
+        catch( DaoException e )
+        {
+            e.printStackTrace();
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------//
+
+//-
 
 //        // Notice that the userDao reference is an Interface type.
 //        // This allows for the use of different concrete implementations.
@@ -45,25 +103,12 @@ public class App
 //        // the interface called "UserDaoInterface", as the code uses
 //        // only references of the interface type to access the DAO methods.
 
+//-
 
-        try
-        {
-            //////////Feature 4
+//----------------------------------------------------------------------------------------------------------------//
 
-            int result = ((MySqlTeamDao) ITeamDao).register("Floris","Ferol","D00248195","Dermot");
-          System.out.println(result);
-//
-            //////////
+///--
 
-            System.out.println("\nCall findAllUsers()");
-            List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
-
-//            if( users.isEmpty() )
-//                System.out.println("There are no Users");
-//            else {
-//                for (User user : users)
-//                    System.out.println("User: " + user.toString());
-//            }
 //
 //            // test dao - with username and password that we know are present in the database
 //            System.out.println("\nCall: findUserByUsernamePassword()");
@@ -84,11 +129,6 @@ public class App
 //                System.out.println("Username: " + username + " was found: " + user);
 //            else
 //                System.out.println("Username: " + username + ", password: " + password +" is not valid.");
-        }
-        catch( DaoException e )
-        {
-            e.printStackTrace();
 
-        }
-    }
-}
+///--
+//----------------------------------------------------------------------------------------------------------------
