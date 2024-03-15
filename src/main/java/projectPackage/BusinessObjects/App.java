@@ -34,12 +34,12 @@ public class App
         //-
         try
         {
-            //////////Feature 4
+            //////////Feature 4////
 
 //          int result = ((MySqlTeamDao) ITeamDao).register("Floris","Ferol","D00248195","Dermot");
 //          System.out.println(result);
 
-            //////////
+            //////////End of Feature 4/////
 
             System.out.println("\nCall findAllUsers()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO

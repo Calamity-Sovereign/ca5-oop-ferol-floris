@@ -22,7 +22,7 @@ public class Team
     private String teamName;
     private String region;
     private String division;
-    private int founded_in;
+    private int foundedIn;
 
     public Team(int Id, String teamCode, String teamName, String region, String division, int founded_in)
     {
@@ -31,17 +31,17 @@ public class Team
         this.teamName = teamName;
         this.region = region;
         this.division = division;
-        this.founded_in = founded_in;
+        this.foundedIn = foundedIn;
     }
 
-    public Team(String Team_Code, String teamName, String region, String division, int founded_in)
+    public Team(String teamCode, String teamName, String region, String division, int founded_in)
     {
         this.id = 0;
         this.teamCode = teamCode;
         this.teamName = teamName;
         this.region = region;
         this.division = division;
-        this.founded_in = founded_in;
+        this.foundedIn = foundedIn;
     }
 
     public Team()
@@ -100,19 +100,19 @@ public class Team
 
     public int getfounded_in()
     {
-        return founded_in;
+        return foundedIn;
     }
 
-    public int setfounded_in(String founded_in)
-    {
-        this.founded_in = founded_in;
+    public void setfounded_in(String founded_in) {this.foundedIn = foundedIn;
+
     }
+
 
     @Override
     public String toString()
     {
         return "team{" + "id=" + id + ", teamCode=" + teamCode + ", teamName=" +
-                teamName + ", region=" + region + ", division=" + division + ", founded_in=" + founded_in + '}';
+                teamName + ", region=" + region + ", division=" + division + ", foundedIn=" + foundedIn + '}';
     }
 
 }
