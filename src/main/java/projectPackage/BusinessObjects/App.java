@@ -41,7 +41,9 @@ public class App
 
             //////////End of Feature 4/////
 
-            System.out.println("\nCall findAllTeams()");
+
+            //////////Start of Feature 6/////09/04/2024
+            System.out.println("\nCallfindAllTeams()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
 
             if( teams.isEmpty() )
@@ -50,15 +52,28 @@ public class App
                 for (Team team : teams)
                     System.out.println("User: " + team.toString());
             }
+            teams.clear();
             ///--
+            System.out.println("\nCall findTeamYearFilter()");
+            teams = ITeamDao.findTeamYearFilter(2016,2019);     // call a method in the DAO
+
+            if( teams.isEmpty() )
+                System.out.println("There are no Users");
+            else {
+                for (Team team : teams)
+                    System.out.println("User: " + team.toString());
+            }
+
 
             ///--
         }
         catch( DaoException e )
         {
             e.printStackTrace();
-
+////End of Feature 6//////
         }
+
+
     }
 }
 

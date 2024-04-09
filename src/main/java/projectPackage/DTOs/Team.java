@@ -31,7 +31,7 @@ public class Team
         this.teamName = teamName;
         this.region = region;
         this.division = division;
-        this.foundedIn = foundedIn;
+        this.foundedIn = founded_in;
     }
 
     public Team(String teamCode, String teamName, String region, String division, int founded_in)
@@ -41,7 +41,7 @@ public class Team
         this.teamName = teamName;
         this.region = region;
         this.division = division;
-        this.foundedIn = foundedIn;
+        this.foundedIn = founded_in;
     }
 
     public Team()

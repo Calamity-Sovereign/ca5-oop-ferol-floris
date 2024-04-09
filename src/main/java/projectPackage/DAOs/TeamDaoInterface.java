@@ -28,6 +28,7 @@ import java.util.List;
 public interface TeamDaoInterface
 {
     public List<Team> findAllTeams() throws DaoException;
+    public List<Team> findTeamYearFilter(int startyear, int endyear) throws DaoException;
 
 //    public User findUserByUsernamePassword(String username, String password) throws DaoException;
 //    public int register(String fname, String lname, String user_name, String password) throws DaoException;

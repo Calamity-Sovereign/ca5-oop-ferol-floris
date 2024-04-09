@@ -27,8 +27,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
-{
+public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 //    /**
 //     * Will access and return a List of all users in User database table
 //     * @return List of User objects
@@ -41,7 +40,7 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        int code=0;
+        int code = 0;
 
         try {
             connection = this.getConnection();
@@ -89,15 +88,13 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
     // Floris Ferol 14 May 2024
     //
     @Override
-    public List<Team> findAllTeams() throws DaoException
-    {
+    public List<Team> findAllTeams() throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Team> usersList = new ArrayList<>();
 
-        try
-        {
+        try {
             //Get connection object using the getConnection() method inherited// from the super class (MySqlDao.java)
             connection = this.getConnection();
 
@@ -106,38 +103,30 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
 
             //Using a PreparedStatement to execute SQL...
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String teamCode = resultSet.getString("Team_Code");
                 String teamName = resultSet.getString("Team_Name");
                 String region = resultSet.getString("Region");
                 String division = resultSet.getString("Division");
-                int  Founded_in = resultSet.getInt("Founded_in");
+                int Founded_in = resultSet.getInt("Founded_in");
                 Team u = new Team(id, teamCode, teamName, region, division, Founded_in);
                 usersList.add(u);
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new DaoException("find All Team ResultSet() " + e.getMessage());
-        } finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-                if (preparedStatement != null)
-                {
+                if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (connection != null)
-                {
+                if (connection != null) {
                     freeConnection(connection);
                 }
-            } catch (SQLException e)
-            {
+            } catch (SQLException e) {
                 throw new DaoException("findAllUsers() " + e.getMessage());
             }
         }
@@ -145,22 +134,22 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
     }
 
     ///////////////////End of Feature 1 code///////////////////
+
     /**
      * Given a username and password, find the corresponding User
+     *
      * @param user_name
      * @param password
      * @return User object if found, or null otherwise
      * @throws DaoException
      */
     @Override
-    public Team findUserByUsernamePassword(String user_name, String password) throws DaoException
-    {
+    public Team findUserByUsernamePassword(String user_name, String password) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Team user = null;
-        try
-        {
+        try {
             connection = this.getConnection();
 
             String query = "SELECT * FROM USER WHERE USERNAME = ? AND PASSWORD = ?";
@@ -169,42 +158,85 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface
             preparedStatement.setString(2, password);
 
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next())
-            {
+            if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String teamCode = resultSet.getString("Team_Code");
                 String teamName = resultSet.getString("Team_Name");
                 String region = resultSet.getString("Region");
                 String division = resultSet.getString("Division");
-                int  Founded_in = resultSet.getInt(" Founded_in");
+                int Founded_in = resultSet.getInt(" Founded_in");
                 Team u = new Team(id, teamCode, teamName, region, division, Founded_in);
 //                TeamList.add(u);
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new DaoException("findUserByUsernamePassword() " + e.getMessage());
-        } finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-                if (preparedStatement != null)
-                {
+                if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (connection != null)
-                {
+                if (connection != null) {
                     freeConnection(connection);
                 }
-            } catch (SQLException e)
-            {
+            } catch (SQLException e) {
                 throw new DaoException("findUserByUsernamePassword() " + e.getMessage());
             }
         }
         return user;     // reference to User object, or null value
     }
-}
 
+////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public List<Team> findTeamYearFilter(int startyear, int endyear) throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Team> usersList = new ArrayList<>();
+
+        try {
+            //Get connection object using the getConnection() method inherited// from the super class (MySqlDao.java)
+            connection = this.getConnection();
+
+            String query = "SELECT * FROM TEAM";
+            preparedStatement = connection.prepareStatement(query);
+
+            //Using a PreparedStatement to execute SQL...
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String teamCode = resultSet.getString("Team_Code");
+                String teamName = resultSet.getString("Team_Name");
+                String region = resultSet.getString("Region");
+                String division = resultSet.getString("Division");
+                int Founded_in = resultSet.getInt("Founded_in");
+
+                if(Founded_in >= startyear && Founded_in <= endyear){
+                    Team u = new Team(id, teamCode, teamName, region, division, Founded_in);
+                    usersList.add(u);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("find All Team ResultSet() " + e.getMessage());
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            } catch (SQLException e) {
+                throw new DaoException("findAllUsers() " + e.getMessage());
+            }
+        }
+        return usersList;     // may be empty
+    }
+
+}
