@@ -27,6 +27,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 //    /**
 //     * Will access and return a List of all users in User database table
@@ -44,6 +46,53 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 
         try {
             connection = this.getConnection();
+
+///////////////////////////Feature 2//////////////////////////////////
+
+            @Override
+            public Team getTeamById(int id) throws DaoException
+            {
+                Connection connection = null;
+                PreparedStatement statement = null;
+                ResultSet result = null;
+
+                try {
+                    connection = this.getConnection();
+                    String query = "SELECT * FROM blocks WHERE id = ?";
+                    statement = connection.prepareStatement(query);
+                    statement.setInt(1, id);
+                    result = statement.executeQuery();
+
+                    if (result.next()) {
+                        return new Team(id,
+                                resultSet.getInt("id");
+                                resultSet.getString("Team_Code");
+                                resultSet.getString("Team_Name");
+                                resultSet.getString("Region");
+                                resultSet.getString("Division");
+                                resultSet.getInt("Founded_in");
+
+                    }
+                } catch (SQLException e) {
+                    throw new DaoException("getBlockById() " + e.getMessage());
+                } finally {
+                    try {
+                        if (result != null) {
+                            result.close();
+                        }
+                        if (statement != null) {
+                            statement.close();
+                        }
+                        if (connection != null) {
+                            freeConnection(connection);
+                        }
+                    } catch (SQLException e) {
+                        throw new DaoException("getBlockById() " + e.getMessage());
+                    }
+                }
+                return null;
+            }
+
 
 //////////////////////Feature 4 //////////////////////////////
 
@@ -113,6 +162,12 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
                 Team u = new Team(id, teamCode, teamName, region, division, Founded_in);
                 usersList.add(u);
             }
+
+            ///
+
+
+
+            ////
         } catch (SQLException e) {
             throw new DaoException("find All Team ResultSet() " + e.getMessage());
         } finally {
@@ -188,7 +243,7 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
         return user;     // reference to User object, or null value
     }
 
-////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////Feature 6///////////////////////////////////////////
 
     @Override
     public List<Team> findTeamYearFilter(int startyear, int endyear) throws DaoException {
@@ -239,4 +294,35 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
         return usersList;     // may be empty
     }
 
+////////////////////////End of Feature 6/////////////////////////////
+
+    //////////////////////////////////Feature 7////////////////////////////
+    public String teamToJson(int id){
+        String jsonString = "";
+        try {
+            Team teamToSerialise = getTeamBy(id);
+
+            Gson gsonPaser = new Gson();
+
+            jsonString = gsonPaser.toJson(teamToSerialise);
+        }
+        catch (DaoException(e) {
+        throw new RuntimeException(e);
+            }
+
+        return jsonString;
+    }
+
+    public String teamToJson(Team teamToSerialise) {
+        String jsonString = "";
+
+        Gson gsonPaser = new Gson();
+
+        jsonString = gsonPaser.toJson(teamToSerialise);
+
+        return jsonString;
+    }
 }
+
+///////////////////////////End of Feature 7////////////////////////////
+
