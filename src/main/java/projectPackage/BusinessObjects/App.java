@@ -41,7 +41,6 @@ public class App
 
             //////////End of Feature 4/////
 
-
             //////////Start of Feature 6/////09/04/2024
             System.out.println("\nCallfindAllTeams()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
@@ -53,17 +52,29 @@ public class App
                     System.out.println("User: " + team.toString());
             }
             teams.clear();
+
+
+            int id_key =4;
+            Team team = ITeamDao.getTeamById(id_key);
+            if(team!=null)
+                System.out.println("Found team: " + team);
+            else
+                System.out.println("team with this id does not exist. id="+id_key);
+
+
+
+
+
             ///--
-            System.out.println("\nCall findTeamYearFilter()");
-            teams = ITeamDao.findTeamYearFilter(2016,2019);     // call a method in the DAO
-
-            if( teams.isEmpty() )
-                System.out.println("There are no Users");
-            else {
-                for (Team team : teams)
-                    System.out.println("User: " + team.toString());
-            }
-
+//            System.out.println("\nCall findTeamYearFilter()");
+//            teams = ITeamDao.findTeamYearFilter(2016,2019);     // call a method in the DAO
+//
+//            if( teams.isEmpty() )
+//                System.out.println("There are no Users");
+//            else {
+//                for (Team t : teams)
+//                    System.out.println("User: " + t.toString());
+//            }
 
             ///--
         }
