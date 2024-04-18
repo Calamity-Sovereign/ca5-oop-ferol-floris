@@ -35,13 +35,16 @@ public class App
         try
         {
             //////////Feature 4////
+            // Floris Ferol
 
 //          int result = ((MySqlTeamDao) ITeamDao).register("Floris","Ferol","D00248195","Dermot");
 //          System.out.println(result);
 
             //////////End of Feature 4/////
 
+
             //////////Start of Feature 6/////09/04/2024
+            // Floris Ferol
             System.out.println("\nCallfindAllTeams()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
 
@@ -51,8 +54,8 @@ public class App
                 for (Team team : teams)
                     System.out.println("User: " + team.toString());
             }
-            teams.clear();
 
+            teams.clear();
 
             int id_key =4;
             Team team = ITeamDao.getTeamById(id_key);
@@ -60,8 +63,6 @@ public class App
                 System.out.println("Found team: " + team);
             else
                 System.out.println("team with this id does not exist. id="+id_key);
-
-
 
 
 
@@ -83,6 +84,8 @@ public class App
             e.printStackTrace();
 ////End of Feature 6//////
         }
+
+        /////Feature 8
 
 
     }

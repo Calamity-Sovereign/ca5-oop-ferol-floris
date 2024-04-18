@@ -240,7 +240,8 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
         return user;     // reference to User object, or null value
     }
 
-/////////////////////////////////Feature 6///////////////////////////////////////////
+/////////////////////////////////Feature 6////////////////////////////////////
+// /////// Floris Ferol
 
     @Override
     public List<Team> findTeamYearFilter(int startyear, int endyear) throws DaoException {
@@ -293,22 +294,38 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 
 ////////////////////////End of Feature 6/////////////////////////////
 
-    //////////////////////////////////Feature 7////////////////////////////
+    //////Feature 8///////////////////////////
+    // Floris Ferol
     public String teamToJson(Team team) {
         String jsonString = "";
 
-            //Team teamToSerialise = getTeamById(id);
+        //Team teamToSerialise = getTeamById(id);
 
-            Gson gsonPaser = new Gson();
-
-            jsonString = gsonPaser.toJson(team);
-
+        Gson gsonPaser = new Gson();
+        jsonString = gsonPaser.toJson(team);
 
 
         return jsonString;
     }
+//////////////////////////End of Feature 8////////////////////////////
+
+//////////////////////////////////Feature 7////////////////////////////
+
+    public String teamListToJson(List<Team> list){
+        String jsonListString = "";
+
+        Gson gsonPaser = new Gson();
+        for (Team team : list){
+           String jsonString = gsonPaser.toJson(team);
+            jsonListString += jsonString;
+    }
+
+
+        return jsonListString;
+    }
 
 }
 
-///////////////////////////End of Feature 7////////////////////////////
+
+
 
