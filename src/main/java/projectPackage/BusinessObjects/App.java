@@ -24,16 +24,13 @@ import projectPackage.Exceptions.DaoException;
 
 import java.util.List;
 
-public class App
-{
-    public static void main(String[] args)
-    {
-            TeamDaoInterface ITeamDao = new MySqlTeamDao();  //"IUserDao" -> "I" stands for for
+public class App {
+    public static void main(String[] args) {
+        TeamDaoInterface ITeamDao = new MySqlTeamDao();  //"IUserDao" -> "I" stands for for
         //-
 
         //-
-        try
-        {
+        try {
             //////////Feature 4////
             // Floris Ferol
 
@@ -48,7 +45,7 @@ public class App
             System.out.println("\nCallfindAllTeams()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
 
-            if( teams.isEmpty() )
+            if (teams.isEmpty())
                 System.out.println("There are no Users");
             else {
                 for (Team team : teams)
@@ -57,14 +54,15 @@ public class App
 
             teams.clear();
 
-            int id_key =4;
+            int id_key = 4;
             Team team = ITeamDao.getTeamById(id_key);
-            if(team!=null)
+            if (team != null)
                 System.out.println("Found team: " + team);
             else
-                System.out.println("team with this id does not exist. id="+id_key);
+                System.out.println("team with this id does not exist. id=" + id_key);
 
-
+            Team teamByID = ITeamDao.getTeamById(2);
+            System.out.println(teamByID.toString());
 
             ///--
 //            System.out.println("\nCall findTeamYearFilter()");
@@ -78,18 +76,14 @@ public class App
 //            }
 
             ///--
-        }
-        catch( DaoException e )
-        {
+        } catch (DaoException e) {
             e.printStackTrace();
 ////End of Feature 6//////
         }
-
-        /////Feature 8
-
-
     }
 }
+
+
 
 
 

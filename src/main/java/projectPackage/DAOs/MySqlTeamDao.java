@@ -32,6 +32,8 @@ import com.google.gson.Gson;
 
 import javax.swing.*;
 
+
+
 public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
     //    /**
 //     * Will access and return a List of all users in User database table
@@ -311,20 +313,63 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 
 //////////////////////////////////Feature 7////////////////////////////
 
-    public String teamListToJson(List<Team> list){
+    public String teamListToJson(List<Team> list) {
         String jsonListString = "";
 
         Gson gsonPaser = new Gson();
-        for (Team team : list){
-           String jsonString = gsonPaser.toJson(team);
+        for (Team team : list) {
+            String jsonString = gsonPaser.toJson(team);
             jsonListString += jsonString;
-    }
+        }
 
 
         return jsonListString;
     }
 
+
+    /////Feature 9////////////////////////
+    public Team displayTeamId(int id) throws DaoException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+
+        try {
+            connection = this.getConnection();
+            String query = "DISPLAY * FROM team WHERE id = ?";
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+
+            if (result.next()) {
+                return new Team(result.getInt("id"),
+                        result.getString("Team_Code"),
+                        result.getString("Team_Name"),
+                        result.getString("Region"),
+                        result.getString("Division"),
+                        result.getInt("Founded_in"));
+
+            }
+        } catch (SQLException e) {
+            throw new DaoException("displayTeamId() " + e.getMessage());
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            } catch (SQLException e) {
+                throw new DaoException("displayTeamId() " + e.getMessage());
+            }
+        }
+        return null;
+    }
 }
+
 
 
 

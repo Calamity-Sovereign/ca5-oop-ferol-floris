@@ -38,6 +38,9 @@ public interface TeamDaoInterface
     ///feature8
    // public Team teamToKey(int id  ) throws DaoException;
 
+    //feature 9
+    public Team displayTeamId(int id) throws DaoException;
+
 //    public User findUserByUsernamePassword(String username, String password) throws DaoException;
 //    public int register(String fname, String lname, String user_name, String password) throws DaoException;
 
