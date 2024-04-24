@@ -56,10 +56,15 @@ public class Client {
 
                 // process the answer returned by the server
                 //
-                if (userRequest.startsWith("GET_ALL_TEAMS"))   // if user asked for "time", we expect the server to return a time (in milliseconds)
+                if (userRequest.startsWith("GET_ALL_TEAMS"))   // if user asked for "TEAM", we expect the server to return All TEAMS
                 {
                     String listOfTeams = in.readLine();  // (blocks) waits for response from server, then input string terminated by a newline character ("\n")
                     System.out.println("Client message: Received list of teams: " + listOfTeams);
+                }
+                else if (userRequest.startsWith("GET_ALL_ID"))   // if user asked for "ID", we expect the server to return all ID'S
+                {
+                    String listOfIdTeams = in.readLine();  // (blocks) waits for response from server, then input string terminated by a newline character ("\n")
+                    System.out.println("Client message: Received list of ID teams: " + listOfIdTeams);
                 }
                 else if (userRequest.startsWith("echo")) // if the user has entered the "echo" command
                 {

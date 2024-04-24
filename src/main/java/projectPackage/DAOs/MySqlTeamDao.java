@@ -32,8 +32,6 @@ import com.google.gson.Gson;
 
 import javax.swing.*;
 
-
-
 public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
     //    /**
 //     * Will access and return a List of all users in User database table
@@ -83,7 +81,7 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
         return null;
     }
 
-    ////////////////
+    ///////
     public int register(String fname, String lname, String user_name, String password) throws DaoException {
 
         Connection connection = null;
@@ -95,7 +93,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
             connection = this.getConnection();
 
 //////////////////////Feature 4 //////////////////////////////
-
             String query = "INSERT INTO USER VALUES ( null, ?, ?, ?, ? )";
 
             preparedStatement = connection.prepareStatement(query);
@@ -131,11 +128,9 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 
     //////////////////End of Feature 4//////////////
 
-
     ///////////////////Feature 1///////////////////
-    ////////Finding all Teams Users/////
-    // Floris Ferol 14 May 2024
-    //
+    ////////Finding all Teams Users/////// Floris Ferol 14 May 2024
+
     @Override
     public List<Team> findAllTeams() throws DaoException {
         Connection connection = null;
@@ -163,10 +158,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
                 usersList.add(u);
             }
 
-            ///
-
-
-            ////
         } catch (SQLException e) {
             throw new DaoException("find All Team ResultSet() " + e.getMessage());
         } finally {
@@ -188,6 +179,51 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
     }
 
     ///////////////////End of Feature 1 code///////////////////
+
+
+    ////////////////////////Feature 9///////////////////////////////////
+    @Override
+    public List<Integer> listOfIdTeams() throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Integer> usersList = new ArrayList<>();
+
+        try {
+            //Get connection object using the getConnection() method inherited// from the super class (MySqlDao.java)
+            connection = this.getConnection();
+
+            String query = "SELECT id FROM team";
+            preparedStatement = connection.prepareStatement(query);
+
+            //Using a PreparedStatement to execute SQL...
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+
+                usersList.add(id);
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException("find All ID ResultSet() " + e.getMessage());
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    freeConnection(connection);
+                }
+            } catch (SQLException e) {
+                throw new DaoException("findAllUsers() " + e.getMessage());
+            }
+        }
+        return usersList;     // may be empty
+    }
+    /////////////////////////////Feature 9//////////////////////////////
 
     /**
      * Given a username and password, find the corresponding User
@@ -244,7 +280,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 
 /////////////////////////////////Feature 6////////////////////////////////////
 // /////// Floris Ferol
-
     @Override
     public List<Team> findTeamYearFilter(int startyear, int endyear) throws DaoException {
         Connection connection = null;
@@ -293,7 +328,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
         }
         return usersList;     // may be empty
     }
-
 ////////////////////////End of Feature 6/////////////////////////////
 
     //////Feature 8///////////////////////////
@@ -312,7 +346,6 @@ public class MySqlTeamDao extends MySqlDao implements TeamDaoInterface {
 //////////////////////////End of Feature 8////////////////////////////
 
 //////////////////////////////////Feature 7////////////////////////////
-
     public String teamListToJson(List<Team> list) {
         String jsonListString = "";
 

@@ -138,19 +138,26 @@ class ClientHandler implements Runnable   // each ClientHandler communicates wit
                 // Implement our PROTOCOL
                 // The protocol is the logic that determines the responses given based on requests received.
                 //
-                if (request.startsWith("GET_ALL_TEAMS"))  // so, client wants the time !
+                if (request.startsWith("GET_ALL_TEAMS"))  // so, client wants the TEAMS  !
                 {
 
                     TeamDaoInterface ITeamDao = new MySqlTeamDao();  //"IUserDao" -> "I" stands for for
                     List<Team> list = ITeamDao.findAllTeams();
-                    String listAsString=null;
-                    for(Team team : list)
+                    String listAsString = null;
+                    for (Team team : list)
                         listAsString = listAsString + team.toString();
+                }
+                    //////////////////////////////////////////////////////////////////////////
+                    if (request.startsWith("GET_ALL_ID"))  // so, client wants the TEAMS  !
+                    {
+                        TeamDaoInterface ITeamDao = new MySqlTeamDao();  //"IUserDao" -> "I" stands for for
+                        List<Integer> list = ITeamDao.listOfIdTeams();
+                        String listAsString = "";
+                        for(Integer team : list)
+                            listAsString = listAsString +", "+ team;
+                        //////////////////////////////{___[_#_#}////////////////////////////////
 
-
-
-
-                    socketWriter.println(listAsString);  // send the time to client (as a string of characters)
+                        socketWriter.println(listAsString);  // send the time to client (as a string of characters)
                     System.out.println("Server message: sent list of teams as string");
 
                 } else if (request.startsWith("echo")) {

@@ -39,9 +39,9 @@ public class App {
 
             //////////End of Feature 4/////
 
+            //////////Start of Feature 6//// Floris Ferol
+            ///09/04/2024
 
-            //////////Start of Feature 6/////09/04/2024
-            // Floris Ferol
             System.out.println("\nCallfindAllTeams()");
             List<Team> teams = ITeamDao.findAllTeams();     // call a method in the DAO
 
@@ -64,7 +64,8 @@ public class App {
             Team teamByID = ITeamDao.getTeamById(2);
             System.out.println(teamByID.toString());
 
-            ///--
+            ///--*turn on or off to preform feature 6*
+
 //            System.out.println("\nCall findTeamYearFilter()");
 //            teams = ITeamDao.findTeamYearFilter(2016,2019);     // call a method in the DAO
 //
